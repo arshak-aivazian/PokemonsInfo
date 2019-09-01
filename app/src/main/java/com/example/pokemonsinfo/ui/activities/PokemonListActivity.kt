@@ -33,6 +33,11 @@ class PokemonListActivity : MvpAppCompatActivity(), PokemonListView {
 
         recyclerViewPokemons.layoutManager = LinearLayoutManager(this)
         recyclerViewPokemons.adapter = adapter
+        adapter.setListener(object : PokemonsAdapter.OnSelectedItem {
+            override fun onClick(pokemon: Pokemon) {
+                pokemonListPresenter.navigateToPokemonInfo(pokemon)
+            }
+        })
     }
 
     override fun showError(text: String) {
@@ -44,5 +49,6 @@ class PokemonListActivity : MvpAppCompatActivity(), PokemonListView {
     }
 
     override fun showPokemonDetail(pokemon: Pokemon) {
+        PokemonDetailActivity.startAcivity(this, pokemon)
     }
 }

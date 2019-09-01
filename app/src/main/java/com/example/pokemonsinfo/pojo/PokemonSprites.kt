@@ -1,6 +1,7 @@
 package com.example.pokemonsinfo.pojo
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class PokemonSprites(
     @field:SerializedName("back_default")
@@ -19,4 +20,4 @@ data class PokemonSprites(
     val frontFemale: String?,
     @field:SerializedName("front_shiny_female")
     val frontShinyFemale: String?
-)
+): Serializable

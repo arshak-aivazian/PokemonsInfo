@@ -12,11 +12,15 @@ import kotlinx.android.synthetic.main.pokemon_item.view.*
 class PokemonsAdapter: RecyclerView.Adapter<PokemonsAdapter.PokemonViewHolder>() {
 
     private var pokemonList: List<Pokemon> = ArrayList()
-    private var onSelectedItem: OnSelectedItem? = null
+    private var listener: OnSelectedItem? = null
 
 
     interface OnSelectedItem{
         fun onClick(pokemon: Pokemon)
+    }
+
+    fun setListener(listener: OnSelectedItem){
+        this.listener = listener
     }
 
     fun setupPokemons(list: List<Pokemon>){
@@ -40,7 +44,7 @@ class PokemonsAdapter: RecyclerView.Adapter<PokemonsAdapter.PokemonViewHolder>()
 
         init {
             itemView.setOnClickListener({
-                onSelectedItem?.onClick(pokemonList[adapterPosition])
+                listener?.onClick(pokemonList[adapterPosition])
             })
         }
 

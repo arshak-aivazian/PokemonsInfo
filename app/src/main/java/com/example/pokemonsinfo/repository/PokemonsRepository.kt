@@ -4,7 +4,7 @@ import com.example.pokemonsinfo.pojo.Pokemon
 import com.example.pokemonsinfo.pojo.PokemonListResponse
 import io.reactivex.Observable
 
-class PokemonsRepository(val apiService: ApiService) {
+class PokemonsRepository(private val apiService: ApiService) {
     fun loadPokemonList(offset: Int, limit: Int): Observable<PokemonListResponse> {
         return apiService.getPokemonList(offset, limit)
     }

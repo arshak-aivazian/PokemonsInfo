@@ -1,6 +1,7 @@
 package com.example.pokemonsinfo.pojo
 
 import com.google.gson.annotations.SerializedName
+import java.io.Serializable
 
 data class Pokemon(
     @field:SerializedName("id")
@@ -17,4 +18,4 @@ data class Pokemon(
     val types: List<TypeList>,
     @field:SerializedName("sprites")
     val sprites: PokemonSprites
-)
+): Serializable
