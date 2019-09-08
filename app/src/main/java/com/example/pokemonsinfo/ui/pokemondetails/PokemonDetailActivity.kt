@@ -1,4 +1,4 @@
-package com.example.pokemonsinfo.ui.activities
+package com.example.pokemonsinfo.ui.pokemondetails
 
 import android.app.Activity
 import android.content.Intent
@@ -9,12 +9,13 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.pokemonsinfo.R
 import com.example.pokemonsinfo.pojo.Pokemon
-import com.example.pokemonsinfo.ui.presenters.PokemonDetailPresenter
-import com.example.pokemonsinfo.ui.views.PokemonDetailView
+import com.example.pokemonsinfo.ui.BaseActivity
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_pokemon_detail.*
+import javax.inject.Inject
+import javax.inject.Provider
 
-class PokemonDetailActivity : MvpAppCompatActivity(), PokemonDetailView {
+class PokemonDetailActivity : BaseActivity(), PokemonDetailView {
 
     companion object{
         val KEY_POKEMON = "pokemonObject"
@@ -26,19 +27,21 @@ class PokemonDetailActivity : MvpAppCompatActivity(), PokemonDetailView {
         }
     }
 
+    fun getPokemon() : Pokemon =  intent.getSerializableExtra(KEY_POKEMON) as Pokemon
+
+    @Inject
+    lateinit var presenterProvider: Provider<PokemonDetailPresenter>
+
     @InjectPresenter
     lateinit var pokemonDetailPresenter: PokemonDetailPresenter
 
     @ProvidePresenter
-    fun providePresenter(): PokemonDetailPresenter{
-        Log.i("TAAG", "presenter")
-        val pokemon = (intent.getSerializableExtra(KEY_POKEMON) as Pokemon)
-        return PokemonDetailPresenter(pokemon)
-    }
+    fun providePresenter(): PokemonDetailPresenter = presenterProvider.get()
+
+    override val layoutId: Int = R.layout.activity_pokemon_detail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pokemon_detail)
     }
 
     override fun showInfo(pokemon: Pokemon) {

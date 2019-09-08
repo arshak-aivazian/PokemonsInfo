@@ -1,4 +1,4 @@
-package com.example.pokemonsinfo.ui.activities
+package com.example.pokemonsinfo.ui.pokemonlist
 
 import android.os.Bundle
 import android.widget.Toast
@@ -8,29 +8,29 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.pokemonsinfo.R
 import com.example.pokemonsinfo.pojo.Pokemon
-import com.example.pokemonsinfo.repository.PokemonsRepositiryProvider
-import com.example.pokemonsinfo.ui.adapters.PokemonsAdapter
-import com.example.pokemonsinfo.ui.presenters.PokemonListPresenter
-import com.example.pokemonsinfo.ui.views.PokemonListView
+import com.example.pokemonsinfo.ui.BaseActivity
+import com.example.pokemonsinfo.ui.pokemondetails.PokemonDetailActivity
 import kotlinx.android.synthetic.main.activity_pokemon_list.*
+import javax.inject.Inject
+import javax.inject.Provider
 
-class PokemonListActivity : MvpAppCompatActivity(), PokemonListView {
+class PokemonListActivity : BaseActivity(), PokemonListView {
 
     val adapter = PokemonsAdapter()
+
+    @Inject
+    lateinit var presenterProvider : Provider<PokemonListPresenter>
 
     @InjectPresenter
     lateinit var pokemonListPresenter: PokemonListPresenter
 
     @ProvidePresenter
-    fun providePresenter() : PokemonListPresenter {
-        val repositiry = PokemonsRepositiryProvider.providePokemonRepository()
-        return PokemonListPresenter(repositiry)
-    }
+    fun providePresenter() : PokemonListPresenter = presenterProvider.get()
+
+    override val layoutId: Int = R.layout.activity_pokemon_list
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_pokemon_list)
-
         recyclerViewPokemons.layoutManager = LinearLayoutManager(this)
         recyclerViewPokemons.adapter = adapter
         adapter.setListener(object : PokemonsAdapter.OnSelectedItem {

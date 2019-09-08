@@ -1,4 +1,4 @@
-package com.example.pokemonsinfo.ui.adapters
+package com.example.pokemonsinfo.ui.pokemonlist
 
 import android.view.LayoutInflater
 import android.view.View
