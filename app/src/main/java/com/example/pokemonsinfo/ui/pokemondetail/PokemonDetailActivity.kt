@@ -1,4 +1,4 @@
-package com.example.pokemonsinfo.ui.activities
+package com.example.pokemonsinfo.ui.pokemondetail
 
 import android.app.Activity
 import android.content.Intent
@@ -9,12 +9,11 @@ import com.arellomobile.mvp.presenter.InjectPresenter
 import com.arellomobile.mvp.presenter.ProvidePresenter
 import com.example.pokemonsinfo.R
 import com.example.pokemonsinfo.pojo.Pokemon
-import com.example.pokemonsinfo.ui.presenters.PokemonDetailPresenter
-import com.example.pokemonsinfo.ui.views.PokemonDetailView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_pokemon_detail.*
 
-class PokemonDetailActivity : MvpAppCompatActivity(), PokemonDetailView {
+class PokemonDetailActivity : MvpAppCompatActivity(),
+    PokemonDetailView {
 
     companion object{
         val KEY_POKEMON = "pokemonObject"
@@ -30,7 +29,7 @@ class PokemonDetailActivity : MvpAppCompatActivity(), PokemonDetailView {
     lateinit var pokemonDetailPresenter: PokemonDetailPresenter
 
     @ProvidePresenter
-    fun providePresenter(): PokemonDetailPresenter{
+    fun providePresenter(): PokemonDetailPresenter {
         Log.i("TAAG", "presenter")
         val pokemon = (intent.getSerializableExtra(KEY_POKEMON) as Pokemon)
         return PokemonDetailPresenter(pokemon)

@@ -1,4 +1,4 @@
-package com.example.pokemonsinfo.ui.views
+package com.example.pokemonsinfo.ui.pokemondetail
 
 import com.arellomobile.mvp.MvpView
 import com.arellomobile.mvp.viewstate.strategy.AddToEndSingleStrategy
